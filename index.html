@@ -1,0 +1,162 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Happy Birthday, Alloulti!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="icon.jpg">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .button {
+            background-color: #d3d3d3;
+            color: red; /* Red text on button */
+            border: 2px solid red; /* Red border around the button */
+            padding: 12px 24px;
+            font-size: 18px;
+            font-family: 'Pacifico', cursive; /* Nice elegant font for the button */
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #c0c0c0;
+            transform: scale(1.05);
+        }
+
+        #pythonCode {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            white-space: pre-wrap;
+            margin-top: 20px;
+            color: #444;
+            line-height: 1.6;
+            display: none; /* Initially hidden */
+        }
+
+        #footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+            display: none; /* Initially hidden */
+        }
+
+        #footer a {
+            color: #555;
+            text-decoration: none;
+        }
+
+        #footer a:hover {
+            text-decoration: underline;
+        }
+
+        .important {
+            color: red; /* Red color for important text */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <button class="button" id="revealButton">Guess what?</button>
+
+    <div id="pythonCode"></div>
+
+    <div id="footer">
+        Made with love by <a href="https://www.instagram.com/acer_jm/" target="_blank">Acer Jemli</a>
+    </div>
+
+    <script>
+        // The Python code, no HTML tags inside
+        const pythonCode = `
+# Today, the 23rd day of February, is your birthday.
+# So I created a webpage to celebrate this special day with you.
+
+class Girl:
+    def __init__(self, name):
+        self.name = "Aloulaa"
+        self.age = 16         # 2009 > 2008 
+        self.happiness = 100  # Always smiling
+
+import datetime
+current_time = datetime.datetime.now()
+birthday = datetime.datetime(2025, 2, 23, 23, 59)  # Set to 23:59
+
+# Explanation for why 23:59 is special
+if current_time.date() == birthday.date():
+    print("I chose 23:59 to send this because I wanted to make sure")
+    print("your special day ended with a moment just as special as you are.")
+    print("This wasn't a mistake or forgetfulness—it was intentional,")
+    print("because you deserve to feel loved and celebrated until the very last minute of your birthday. ♥")
+    print()
+
+    girl = Girl("Aloulaa")
+    girl.age += 1
+    
+    # My love will be with you simultaneously.
+    # Forever and ever. I wish
+    while True:
+        # Happiness
+        girl.happiness += 1
+        # luckiness 
+        girl.fortune += 1
+
+# The last thing I wanna say, boring and ordinary, is :
+print("Happyyy Birthdayyyyy tooo Youuuu")
+        `;
+
+        const codeContainer = document.getElementById("pythonCode");
+        const revealButton = document.getElementById("revealButton");
+        const footer = document.getElementById("footer");
+        let index = 0;
+
+        // Function to start typewriter effect
+        function typeWriterEffect() {
+            if (index < pythonCode.length) {
+                let currentChar = pythonCode[index];
+                codeContainer.innerHTML += currentChar === '\n' ? '<br>' : currentChar; // Insert as HTML
+                index++;
+                setTimeout(typeWriterEffect, 50); // Adjust speed (50ms per character)
+            } else {
+                footer.style.display = "block"; // Show footer after typing is done
+                highlightImportantText(); // Highlight important text in red after typing
+            }
+
+            // Scroll to the bottom + 1 line of space after every character
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        // Function to highlight important text after the typing effect
+        function highlightImportantText() {
+            const importantText = ['Aloulaa','59','because you deserve to feel loved and celebrated until the very last minute of your birthday. ♥','Acer Jemli', '23','2','My love will be with you simultaneously','Happyyy Birthdayyyyy tooo Youuuu','February', '2025', '16'];
+            let code = codeContainer.innerHTML;
+
+            importantText.forEach(word => {
+                const regex = new RegExp(`(${word})`, 'g');
+                code = code.replace(regex, '<span class="important">$1</span>'); // Wrap important words with span
+            });
+
+            codeContainer.innerHTML = code; // Apply the updated code with highlighted words
+        }
+
+        // Show code on button click
+        revealButton.addEventListener('click', () => {
+            revealButton.style.display = "none"; // Hide the button
+            codeContainer.style.display = "block"; // Show the Python code container
+            typeWriterEffect(); // Start typing effect
+        });
+    </script>
+</body>
+</html>
